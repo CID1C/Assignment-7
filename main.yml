@@ -1,0 +1,23 @@
+name: C CI
+
+on:
+  push:
+    branches: [ main, Test, Features ]
+  pull_request:
+    branches: [ main, Test ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Install build-essential
+      run: sudo apt-get update && sudo apt-get install build-essential -y
+      
+    - name: Compile C program
+      run: make all
+      
+    - name: Run tests
+      run: make test
